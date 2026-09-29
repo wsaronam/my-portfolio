@@ -1,12 +1,17 @@
+import { Link, NavLink } from "react-router"
+
+
+
+
 export function SiteHeader() {
     return (
         <header>
-            <a href='/'>Willy Saronamihardja</a>
+            <Link to='/'>Willy Saronamihardja</Link>
             <nav aria-label='Main'>
                 <ul>
-                    <li><a href='/'>Home</a></li>
-                    <li><a href='/projects'>Projects</a></li>
-                    <li><a href='/blog'>Blog</a></li>
+                    <li><NavLink to="/" end>Home</NavLink></li>
+                    <li><NavLink to="/projects">Projects</NavLink></li>
+                    <li><NavLink to="/blog">Blog</NavLink></li>
                 </ul>
             </nav>
         </header>
