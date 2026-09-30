@@ -1,17 +1,23 @@
+import type { Project } from "./types";
+import { Link } from "react-router";
+
+
+
+
 type ProjectCardProps = {
-    title: string
-    summary: string
-    tags: string[]
+    project: Project
 }
 
 
-export function ProjectCard({ title, summary, tags }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
     return (
         <article>
-            <h3>{title}</h3>
-            <p>{summary}</p>
-            <ul>
-                {tags.map((tag) => (
+            <h3>
+                <Link to={``}>{project.title}</Link>
+            </h3>
+            <p>{project.summary}</p>
+            <ul aria-label='Technologies'>
+                {project.tags.map((tag) => (
                     <li key={tag}>{tag}</li>
                 ))}
             </ul>
