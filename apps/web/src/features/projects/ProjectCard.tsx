@@ -13,7 +13,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     return (
         <article>
             <h3>
-                <Link to={``}>{project.title}</Link>
+                <Link to={`/projects/${project.slug}`}>{project.title}</Link>
             </h3>
             <p>{project.summary}</p>
             <ul aria-label='Technologies'>

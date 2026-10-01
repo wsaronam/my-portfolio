@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { ProjectsPage } from "./features/projects/ProjectsPage";
 import { BlogPage } from "./features/blog/BlogPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { ProjectDetailPage } from "./features/projects/ProjectDetailPage";
 
 
 
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: 'projects', element: <ProjectsPage /> },
+            { path: 'projects/:slug', element: <ProjectDetailPage /> },
             { path: 'blog', element: <BlogPage /> },
             { path: '*', element: <NotFoundPage /> }
         ]
