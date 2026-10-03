@@ -15,6 +15,18 @@ const projects: Project[] = [
         repoUrl: 'https://github.com/wsaronam/ai-map-generator',
         liveUrl: 'https://ai-map-generator-beta.vercel.app',
     },
+
+    {
+        slug: 'web-vulnerability-scanner',
+        title: 'Web Vulnerability Scanner',
+        summary: 'Scans web applications for security vulnerabilities.  React frontend, Flask backend.',
+        category: 'security',
+        tags: ['react', 'flask', 'python'],
+        date: '2026-06-02',
+        featured: true,
+        repoUrl: 'https://github.com/wsaronam/web-vulnerability-scanner',
+        liveUrl: 'https://web-vulnerability-scanner-kohl.vercel.app',
+    }
 ]
 
 
