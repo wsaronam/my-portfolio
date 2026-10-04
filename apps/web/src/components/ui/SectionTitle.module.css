@@ -1,0 +1,14 @@
+.title {
+    display: inline-block;
+    font-size: 2rem;
+    padding: 0.15em 0.5em;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    transform: skewX(var(--skew)) rotate(-2deg);
+    box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+.text {
+    display: inline-block;
+    transform: skewX(calc(var(--skew) * -1));
+}

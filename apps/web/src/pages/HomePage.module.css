@@ -1,0 +1,8 @@
+.hero {
+    padding-block: var(--space-4) var(--space-5);
+}
+
+.tagline {
+    font-size: 1.25rem;
+    color: var(--color-muted);
+}

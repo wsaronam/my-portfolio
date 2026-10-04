@@ -1,7 +1,16 @@
-import type { Project } from "./types";
+import type { Project, ProjectCategory } from "./types";
+import { TagList } from "../../components/ui/TagList";
 import { Link } from "react-router";
 
+import styles from './ProjectCard.module.css';
 
+
+
+
+const CATEGORY_LABELS: Record<ProjectCategory, string> = {
+    security: 'Security',
+    software: 'Software'
+}
 
 
 type ProjectCardProps = {
@@ -11,16 +20,15 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
     return (
-        <article>
-            <h3>
-                <Link to={`/projects/${project.slug}`}>{project.title}</Link>
+        <article className={styles.card}>
+            <p className={styles.category}>{CATEGORY_LABELS[project.category]}</p>
+            <h3 className={styles.title}>
+                <Link to={`/projects/${project.slug}`} className={styles.link}>
+                    {project.title}
+                </Link>
             </h3>
-            <p>{project.summary}</p>
-            <ul aria-label='Technologies'>
-                {project.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                ))}
-            </ul>
+            <p className={styles.summary}>{project.summary}</p>
+            <TagList tags={project.tags} label='Technologies' />
         </article>
     )
 }

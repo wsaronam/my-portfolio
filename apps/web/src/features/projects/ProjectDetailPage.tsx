@@ -1,6 +1,7 @@
 import { ExternalLink } from "../../components/ui/ExternalLink";
 import { NotFoundPage } from "../../pages/NotFoundPage";
 import { getProjectBySlug } from "./projects.data";
+import { TagList } from "../../components/ui/TagList";
 
 import { useParams, Link } from "react-router";
 
@@ -24,11 +25,7 @@ export function ProjectDetailPage() {
             <h1>{project.title}</h1>
             <p>{project.summary}</p>
 
-            <ul>
-                {project.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                ))}
-            </ul>
+            <TagList tags={project.tags} label='Technologies' />
 
             <ul>
                 <li>
