@@ -21,7 +21,9 @@ type ProjectCardProps = {
 export function ProjectCard({ project }: ProjectCardProps) {
     return (
         <article className={styles.card}>
-            <p className={styles.category}>{CATEGORY_LABELS[project.category]}</p>
+            <p className={styles.category} data-category={project.category}>
+                {CATEGORY_LABELS[project.category]}
+            </p>
             <h3 className={styles.title}>
                 <Link to={`/projects/${project.slug}`} className={styles.link}>
                     {project.title}

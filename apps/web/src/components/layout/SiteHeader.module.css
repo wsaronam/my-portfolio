@@ -16,28 +16,56 @@
 }
 
 .brand {
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
     color: var(--color-text);
     text-decoration: none;
 }
 
+.brandAccent {
+    color: var(--color-accent);
+}
+
 .nav {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-2);
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .link {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--color-muted);
     text-decoration: none;
 }
 
+/* slanted color block behind the link that's activate on hover or active */
+.link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-accent);
+    transform: skewX(var(--skew)) scaleX(0);
+    transform-origin: left;
+    transition: transform 150ms ease;
+}
+
 .link:hover,
 .link[aria-current='page'] {
-    color: var(--color-text);
-    text-decoration: underline;
-    text-decoration-color: var(--color-accent);
-    text-decoration-thickness: 2px;
+    color: var(--color-accent-ink);
+}
+
+.link:hover::before,
+.link[aria-current='page']::before {
+    transform: skewX(var(--skew)) scaleX(1);
 }

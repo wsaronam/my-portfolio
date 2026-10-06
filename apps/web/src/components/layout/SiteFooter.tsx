@@ -9,7 +9,7 @@ export function SiteFooter() {
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.inner}`}>
-                <p>© {year} Willy Saronamihardja - Thank you for visiting!</p>
+                <p>© {year} Willy Saronamihardja · Thank you for visiting!</p>
             </div>
         </footer>
     )

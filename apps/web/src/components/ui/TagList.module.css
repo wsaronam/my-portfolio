@@ -8,8 +8,12 @@
 }
 
 .tag {
-    padding: 0.1rem var(--space-2);
-    border-radius: 999px;
-    background: var(--color-tag-bg);
+    padding: 0 0.6em;
     font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-paper);
+    background: var(--color-ink);
+    transform: skewX(var(--skew));
 }

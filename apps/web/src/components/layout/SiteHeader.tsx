@@ -10,7 +10,7 @@ export function SiteHeader() {
         <header className={styles.header}>
             <div className={`container ${styles.inner}`}>
                 <Link to='/' className={styles.brand}>
-                    <span className={styles.brandAccent}>Willy Saronamihardja</span>
+                    Willy<span className={styles.brandAccent}>Saronamihardja</span>
                 </Link>
                 <nav aria-label='Main'>
                     <ul className={styles.nav}>

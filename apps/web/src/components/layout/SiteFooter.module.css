@@ -1,7 +1,7 @@
 .footer {
-    border-top: 1px solid var(--color-border);
+    border-top: 4px solid var(--color-accent);
+    background: var(--color-ink);
     color: var(--color-muted);
-    font-size: 0.95rem;
 }
 
 .inner {
@@ -10,4 +10,8 @@
 
 .inner p {
     margin: 0;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
