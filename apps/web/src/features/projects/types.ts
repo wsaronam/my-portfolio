@@ -1,4 +1,6 @@
-export type ProjectCategory = 'security' | 'software'
+import type { ProjectCategory } from "./categories"
+
+
 
 
 export type Project = {

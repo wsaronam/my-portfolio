@@ -1,16 +1,11 @@
-import type { Project, ProjectCategory } from "./types";
+import type { Project } from "./types";
+import { CATEGORY_LABELS } from "./categories";
 import { TagList } from "../../components/ui/TagList";
 import { Link } from "react-router";
 
 import styles from './ProjectCard.module.css';
 
 
-
-
-const CATEGORY_LABELS: Record<ProjectCategory, string> = {
-    security: 'Security',
-    software: 'Software'
-}
 
 
 type ProjectCardProps = {
