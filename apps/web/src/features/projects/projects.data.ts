@@ -44,3 +44,23 @@ export function getFeaturedProjects(): Project[] {
 export function getProjectBySlug(slug: string): Project | undefined {
     return projects.find((project) => project.slug === slug);
 }
+
+
+export type AdjacentProjects = {
+    previous?: Project
+    next?: Project
+}
+
+export function getAdjacentProjects(slug: string): AdjacentProjects {
+    const all = getAllProjects();
+    const index = all.findIndex((project) => project.slug === slug);
+
+    if (index === -1) {
+        return {};
+    }
+
+    return {
+        previous: index > 0 ? all[index - 1] : undefined,
+        next: index < all.length - 1 ? all[index + 1] : undefined
+    }
+}
