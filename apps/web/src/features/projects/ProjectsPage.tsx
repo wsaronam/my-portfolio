@@ -1,4 +1,6 @@
 import { getAllProjects } from "./projects.data"
+import { PageHeader } from "../../components/ui/PageHeader";
+import { EmptyState } from "../../components/ui/EmptyState";
 import { ProjectGrid } from "./ProjectGrid";
 import { CategoryFilter, type FilterOption } from "./CategoryFilter";
 import { CATEGORY_LABELS, isProjectCategory, PROJECT_CATEGORIES } from "./categories";
@@ -34,11 +36,11 @@ export function ProjectsPage() {
 
     return (
         <>
-            <header className={styles.header}>
-                <p className={styles.kicker}>Quest Log</p>
-                <h1>Projects</h1>
-                <p className={styles.lead}>Things I've built and/or broken</p>
-            </header>
+            <PageHeader
+                kicker='Quest Log'
+                title='Projects'
+                lead="Things I've built and/or broken"
+            />
 
             <CategoryFilter options={filterOptions} active={activeCategory} />
 
@@ -49,7 +51,7 @@ export function ProjectsPage() {
             {visibleProjects.length > 0 ? (
                 <ProjectGrid projects={visibleProjects} />
             ) : (
-                <p className={styles.empty}>No projects in this category yet.</p>
+                <EmptyState>No projects in this category yet.</EmptyState>
             )}
         </>
     )
