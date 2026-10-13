@@ -1,0 +1,123 @@
+.screen {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    padding-block: var(--space-4);
+}
+
+/* error code 404 */
+.code {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(7rem, 30vw, 14rem);
+    line-height: 0.85;
+    color: var(--color-accent);
+    -webkit-text-stroke: 3px var(--color-paper);
+    text-shadow: 8px 8px 0 var(--color-paper);
+    transform: rotate(-4deg);
+}
+
+/* GAME OVER banner */
+.heading {
+    display: inline-block;
+    margin: var(--space-4) 0;
+    padding: 0.1em 0.6em;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    text-shadow: none;
+    box-shadow: 8px 8px 0 var(--color-accent);
+    transform: skewX(var(--skew)) rotate(-2deg);
+}
+
+.headingText {
+    display: inline-block;
+    transform: skewX(calc(var(--skew) * -1));
+}
+
+.message {
+    max-width: 42ch;
+    font-size: 1.15rem;
+    color: var(--color-muted);
+}
+
+/* the address that the visitor tried to visit */
+.path {
+    padding: 0.1em 0.4em;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.95em;
+    color: var(--color-text);
+    background: rgb(255 255 255 / 0.1);
+    word-break: break-all;
+}
+
+
+/* ---------- Continue? menu ---------- */
+.prompt {
+    margin: var(--space-4) 0 var(--space-3);
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    text-shadow: 3px 3px 0 var(--color-accent);
+}
+
+.menu {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.option {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    padding: 0.25em 1.2em;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+/* red highlight behind the option */
+.option::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-accent);
+    transform: skewX(var(--skew)) scaleX(0);
+    transform-origin: left;
+    transition: transform 150ms ease;
+}
+
+/* ▶ cursor to the left of the option */
+.option::after {
+    content: '▶' / '';
+    position: absolute;
+    top: 50%;
+    left: -1.1em;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateY(-50%);
+}
+
+.option:hover,
+.option:focus-visible {
+    color: var(--color-accent-ink);
+    outline: none;
+}
+
+.option:hover::before,
+.option:focus-visible::before {
+    transform: skewX(var(--skew)) scaleX(1);
+}
+
+.option:hover::after,
+.option:focus-visible::after {
+    opacity: 1;
+}
