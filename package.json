@@ -8,7 +8,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:web": "npm run dev --workspace=web",
-    "dev:api": "npm run dev --workspace=api"
+    "dev:api": "npm run dev --workspace=api",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:generate": "npm run db:generate --workspace=api",
+    "db:migrate": "npm run db:migrate --workspace=api"
   },
   "repository": {
     "type": "git",
