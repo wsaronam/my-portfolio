@@ -1,5 +1,5 @@
 import { buildApp } from "./app.js";
-import { loadConfig } from "./routes/config.js";
+import { loadConfig } from "./config.js";
 
 
 
