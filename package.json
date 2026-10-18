@@ -13,7 +13,8 @@
     "db:down": "docker compose down",
     "db:generate": "npm run db:generate --workspace=api --",
     "db:migrate": "npm run db:migrate --workspace=api --",
-    "db:check": "npm run db:check --workspace=api"
+    "db:check": "npm run db:check --workspace=api",
+    "db:seed": "npm run db:seed --workspace=api --"
   },
   "repository": {
     "type": "git",
