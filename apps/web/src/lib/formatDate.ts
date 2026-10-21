@@ -1,6 +1,6 @@
 /* turns "2026-06-02" into a Date at midnight UTC, so it's the same day for every visitor */
-function toUtcDate(isoDate: string): Date {
-    return new Date(`${isoDate}T00:00:00Z`)
+function toUtcDate(value: string): Date {
+    return new Date(value.length === 10 ? `${value}T00:00:00Z` : value);
 }
 
 
