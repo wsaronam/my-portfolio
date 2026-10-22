@@ -1,0 +1,33 @@
+.pagination {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+}
+
+.status {
+    margin: 0;
+    font-family: var(--font-display);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.link {
+    justify-self: start;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.link[rel='next'] {
+    justify-self: end;
+}
+
+.link:hover {
+    color: var(--color-accent);
+}
