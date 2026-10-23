@@ -1,0 +1,27 @@
+.error {
+    max-width: 40rem;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.retry {
+    padding: 0.3em 1.4em;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border: 3px solid var(--color-paper);
+    cursor: pointer;
+}
+
+.retry:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}

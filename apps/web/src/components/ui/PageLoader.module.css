@@ -1,0 +1,13 @@
+.loader {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.text {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}

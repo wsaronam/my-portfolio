@@ -1,10 +1,10 @@
 .shell {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.main {
     flex: 1;
     padding-block: var(--space-5);
+    transition: opacity 150ms ease;
+}
+
+/* while the next page's data loads, dim the current one so clicks feel acknowledged */
+.main[aria-busy='true'] {
+    opacity: 0.5;
 }
