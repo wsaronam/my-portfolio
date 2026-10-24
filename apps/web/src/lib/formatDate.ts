@@ -39,3 +39,15 @@ export function getDateParts(isoDate: string): DateParts {
 
     return { day: find('day'), month: find('month'), year: find('year') };
 }
+
+
+const longDateFormatter = new Intl.DateTimeFormat('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC'
+})
+
+export function formatLongDate(isoDate: string): string {
+    return longDateFormatter.format(toUtcDate(isoDate));
+}
