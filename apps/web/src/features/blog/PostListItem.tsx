@@ -3,6 +3,7 @@ import { getDateParts } from "../../lib/formatDate"
 import type { PostSummary } from "./posts.schemas";
 
 import styles from './PostListItem.module.css';
+import { Link } from "react-router";
 
 
 
@@ -23,7 +24,11 @@ export function PostListItem({ post }: PostListItemProps) {
             </time>
 
             <div>
-                <h2 className={styles.title}>{post.title}</h2>
+                <h2 className={styles.title}>
+                    <Link to={`/blog/${post.slug}`} className={styles.link}>
+                        {post.title}
+                    </Link>
+                </h2>
                 <p className={styles.summary}>{post.summary}</p>
                 <TagList tags={post.tags} label='Topics' />
             </div>
