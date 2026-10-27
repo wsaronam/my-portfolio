@@ -9,6 +9,7 @@ const envSchema = z.object({
     PORT: z.coerce.number().int().min(1).max(65535).default(3000),
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
     DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+    APP_ORIGIN: z.url().default('http://localhost:5173'), //website's address.  only requests from this origin may change data
 })
 
 

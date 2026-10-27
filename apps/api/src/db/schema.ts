@@ -27,5 +27,35 @@ export const posts = pgTable(
 )
 
 
+export const users = pgTable(
+    'users',
+    {
+        id: uuid('id').primaryKey().defaultRandom(),
+        email: text('email').notNull().unique(),
+        passwordHash: text('password_hash').notNull(),
+        createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+    },
+    (table) => [check('users_email_lowercase', sql`${table.email} = lower(${table.email})`)],
+)
+
+
+export const sessions = pgTable(
+    'sessions',
+    {
+        // a SHA-256 hash of the session token. the token itself is never stored
+        id: text('id').primaryKey(),
+        userId: uuid('user_id')
+        .notNull()
+        .references(() => users.id, { onDelete: 'cascade' }),
+        expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+        createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    },
+    (table) => [
+        index('sessions_user_id_idx').on(table.userId),
+        index('sessions_expires_at_idx').on(table.expiresAt),
+    ],
+)
+
+
 export type PostRow = typeof posts.$inferSelect;
 export type NewPostRow = typeof posts.$inferInsert;
