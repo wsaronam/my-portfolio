@@ -1,5 +1,6 @@
 import type { FastifyError, FastifyReply, FastifyRequest } from "fastify";
 import { hasZodFastifySchemaValidationErrors } from "fastify-type-provider-zod";
+import { STATUS_CODES } from 'node:http';
 
 
 
@@ -31,7 +32,8 @@ export function errorHandler(error: FastifyError, request: FastifyRequest, reply
 
     return reply.code(statusCode).send({
         statusCode,
-        error: error.name,
+        // standard name for the status code
+        error: STATUS_CODES[statusCode] ?? 'Error',
         message: error.message,
     })
 }
