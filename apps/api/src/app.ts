@@ -9,6 +9,7 @@ import { createOriginCheck } from "./http/originCheck.js";
 import cookie from '@fastify/cookie';
 import rateLimit from '@fastify/rate-limit';
 import { authRoutes } from "./features/auth/auth.routes.js";
+import { adminPostsRoutes } from "./features/admin-posts/adminPosts.routes.js";
 
 
 
@@ -52,8 +53,9 @@ export function buildApp(config: Config): FastifyInstance {
     app.register(rateLimit, { global: false });
 
     app.register(healthRoutes);
-    app.register(postsRoutes, { prefix: 'api/posts' })
+    app.register(postsRoutes, { prefix: 'api/posts' });
     app.register(authRoutes, { prefix: '/api/auth' });
+    app.register(adminPostsRoutes, { prefix: '/api/admin/posts' });
 
     return app;
 }
