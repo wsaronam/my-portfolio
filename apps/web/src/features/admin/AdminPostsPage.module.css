@@ -1,0 +1,132 @@
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.title {
+    margin: 0;
+}
+
+.count {
+    margin: 0;
+    font-family: var(--font-display);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+/* wide tables scroll inside their panel on small screens.
+   position: relative keeps absolutely positioned children (like the
+   visually hidden "Actions" label) inside the panel too */
+.panel {
+    position: relative;
+    overflow-x: auto;
+    background: var(--color-paper);
+    border: 4px solid var(--color-ink);
+    box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+
+.table {
+    width: 100%;
+    min-width: 36rem;
+    border-collapse: collapse;
+    color: var(--color-ink);
+}
+
+.table th {
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
+    color: var(--color-paper);
+    background: var(--color-ink);
+}
+
+.table td {
+    padding: var(--space-3);
+    vertical-align: middle;
+    border-top: 2px solid rgb(0 0 0 / 0.12);
+}
+
+
+.postTitle {
+    display: block;
+    font-weight: 800;
+}
+
+.slug {
+    font-size: 0.85rem;
+    color: var(--color-text-on-paper);
+}
+
+
+/* status badges: the colour comes from data-status */
+.status {
+    display: inline-block;
+    padding: 0.05em 0.6em;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+}
+
+.status[data-status='published'] {
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.status[data-status='scheduled'] {
+    color: var(--color-paper);
+    background: var(--color-ink);
+}
+
+.status[data-status='draft'] {
+    border-style: dashed;
+}
+
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.action {
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+}
+
+
+.delete {
+    padding: 0.15em 0.7em;
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+}
+
+.delete:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
