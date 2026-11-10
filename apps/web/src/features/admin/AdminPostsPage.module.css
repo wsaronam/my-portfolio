@@ -130,3 +130,28 @@
     opacity: 0.5;
     cursor: wait;
 }
+
+
+.postTitle {
+    display: block;
+    font-weight: 800;
+    color: var(--color-ink);
+    text-decoration: none;
+}
+
+.postTitle:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+.newPost {
+    padding: 0.3em 1em;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border: 3px solid var(--color-paper);
+    text-decoration: none;
+}

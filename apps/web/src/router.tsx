@@ -17,6 +17,8 @@ import { adminLayoutLoader } from './features/admin/adminLayout.loader';
 import { AdminPostsPage } from './features/admin/AdminPostsPage';
 import { adminPostsLoader, adminPostsAction } from './features/admin/adminPosts.route';
 import { logoutAction } from './features/admin/logout.action';
+import { postEditorAction, postEditorLoader } from './features/admin/PostEditor.route';
+import { PostEditorPage } from './features/admin/PostEditorPage';
 
 
 
@@ -60,6 +62,20 @@ export const router = createBrowserRouter([
                 errorElement: <RouteErrorPage />,
             },
             { path: 'logout', action: logoutAction },
+            {
+                path: 'posts/new',
+                element: <PostEditorPage />,
+                loader: postEditorLoader,
+                action: postEditorAction,
+                errorElement: <RouteErrorPage />,
+            },
+            {
+                path: 'posts/:id/edit',
+                element: <PostEditorPage />,
+                loader: postEditorLoader,
+                action: postEditorAction,
+                errorElement: <RouteErrorPage />,
+            },
         ]
     }
 ])

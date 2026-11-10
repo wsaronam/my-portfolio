@@ -22,10 +22,13 @@ export function AdminPostsPage() {
                 <p className={styles.count}>
                     {items.length} {items.length === 1 ? 'post' : 'posts'}
                 </p>
+                <Link to="/admin/posts/new" className={styles.newPost}>
+                    + New Post
+                </Link>
             </header>
 
             {items.length === 0 ? (
-                <EmptyState>No posts yet.</EmptyState>
+                <EmptyState>No posts yet. Click “New Post” to write your first one.</EmptyState>
             ) : (
                 <div className={styles.panel}>
                     <table className={styles.table}>
@@ -60,7 +63,9 @@ function PostRow({ post }: { post: AdminPostListItem }) {
     return (
         <tr>
             <td>
-                <span className={styles.postTitle}>{post.title}</span>
+                <Link to={`/admin/posts/${post.id}/edit`} className={styles.postTitle}>
+                    {post.title}
+                </Link>
                 <span className={styles.slug}>/{post.slug}</span>
             </td>
             <td>
@@ -73,6 +78,9 @@ function PostRow({ post }: { post: AdminPostListItem }) {
             </td>
             <td>
                 <div className={styles.actions}>
+                    <Link to={`/admin/posts/${post.id}/edit`} className={styles.action}>
+                        Edit
+                    </Link>
                     {status === 'published' && (
                         <Link to={`/blog/${post.slug}`} className={styles.action}>
                             View
