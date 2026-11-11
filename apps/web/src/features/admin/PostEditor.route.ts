@@ -40,7 +40,7 @@ export type PostEditorActionData = { fieldErrors?: FieldErrors; formError?: stri
 
 
 /** works out the publish date the API should store */
-function toPublishedAt(form: PostFormValues, now = new Date()): string | null {
+export function toPublishedAt(form: PostFormValues, now = new Date()): string | null {
     switch (form.publishMode) {
         case 'draft':
             return null;
