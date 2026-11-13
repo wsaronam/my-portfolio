@@ -15,7 +15,8 @@
     "db:check": "npm run db:check --workspace=api",
     "db:seed": "npm run db:seed --workspace=api --",
     "admin:create": "npm run admin:create --workspace=api --",
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present",
+    "test:int": "npm run test:int --workspace=api"
   },
   "repository": {
     "type": "git",
