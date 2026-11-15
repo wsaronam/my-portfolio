@@ -7,8 +7,6 @@ import { CATEGORY_LABELS, isProjectCategory, PROJECT_CATEGORIES } from "./catego
 
 import { useSearchParams } from "react-router";
 
-import styles from './ProjectsPage.module.css';
-
 
 
 
