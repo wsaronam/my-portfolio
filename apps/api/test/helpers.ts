@@ -16,12 +16,13 @@ export const ADMIN_PASSWORD = 'correct horse battery staple';
 
 
 /** the real app, configured for tests: test database, no log noise */
-export async function buildTestApp(): Promise<FastifyInstance> {
+export async function buildTestApp(env: Record<string, string> = {}): Promise<FastifyInstance> {
     const config = loadConfig({
         NODE_ENV: 'test',
         LOG_LEVEL: 'silent',
         DATABASE_URL: getTestDatabaseUrl(),
         APP_ORIGIN,
+        ...env,
     });
 
     const app = buildApp(config);

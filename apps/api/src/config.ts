@@ -9,7 +9,28 @@ const envSchema = z.object({
     PORT: z.coerce.number().int().min(1).max(65535).default(3000),
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
     DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
-    APP_ORIGIN: z.url().default('http://localhost:5173'), //website's address.  only requests from this origin may change data
+    // website's address.  only requests from this origin may change data
+    APP_ORIGIN: z.url().default('http://localhost:5173'), 
+    // the proxies (load balancers) in front of this server, as a comma-separated
+    // list of IPs, IP ranges (CIDR) or 'loopback' / 'linklocal' / 'uniquelocal'.
+    // empty = no proxy: ignore X-Forwarded-For, because any visitor could fake it
+    TRUST_PROXY: z
+        .string()
+        .default('')
+        .transform((value) => value.split(',').map((entry) => entry.trim()).filter(Boolean))
+        .pipe(
+            z
+                .array(
+                    z.union([
+                        z.ipv4(),
+                        z.ipv6(),
+                        z.cidrv4(),
+                        z.cidrv6(),
+                        z.enum(['loopback', 'linklocal', 'uniquelocal']),
+                    ]),
+                )
+                .max(20),
+        ),
 })
 
 

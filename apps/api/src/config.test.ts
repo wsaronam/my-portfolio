@@ -15,11 +15,19 @@ describe('loadConfig', () => {
             HOST: '127.0.0.1',
             PORT: 3000,
             APP_ORIGIN: 'http://localhost:5173',
+            TRUST_PROXY: [],
         });
     })
 
     it('turns PORT from text into a number', () => {
         expect(loadConfig({ DATABASE_URL, PORT: '8080' }).PORT).toBe(8080);
+    })
+
+    it('reads TRUST_PROXY as a list of addresses', () => {
+        expect(loadConfig({ DATABASE_URL, TRUST_PROXY: ' 10.0.0.0/8, loopback ' }).TRUST_PROXY).toEqual([
+            '10.0.0.0/8',
+            'loopback',
+        ]);
     })
 
     it('fails fast when DATABASE_URL is missing', () => {
@@ -31,6 +39,8 @@ describe('loadConfig', () => {
         ['PORT', '70000'],
         ['NODE_ENV', 'prod'],
         ['APP_ORIGIN', 'not a url'],
+        ['TRUST_PROXY', 'true'],
+        ['TRUST_PROXY', '999.1.1.1'],
     ])('rejects an invalid %s', (name, value) => {
         expect(() => loadConfig({ DATABASE_URL, [name]: value })).toThrow(new RegExp(name));
     })
