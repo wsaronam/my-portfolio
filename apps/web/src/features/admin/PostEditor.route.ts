@@ -67,7 +67,7 @@ export async function postEditorAction({
     const result = postFormSchema.safeParse(formData);
 
     if (!result.success) {
-        return { fieldErrors: z.flattenError(result.error).fieldErrors as FieldErrors };
+        return { fieldErrors: z.flattenError(result.error).fieldErrors };
     }
 
     const form = result.data;

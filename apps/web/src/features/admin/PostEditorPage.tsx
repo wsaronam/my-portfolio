@@ -14,7 +14,7 @@ import styles from './PostEditorPage.module.css';
 
 export function PostEditorPage() {
     const post = useLoaderData<typeof postEditorLoader>();
-    const actionData = useActionData() as PostEditorActionData | undefined;
+    const actionData = useActionData<PostEditorActionData>();
     const errors: FieldErrors = actionData?.fieldErrors ?? {};
     const navigation = useNavigation();
     const isSaving = navigation.state === 'submitting';
@@ -139,7 +139,7 @@ export function PostEditorPage() {
                         {(props) => (
                             <textarea
                                 {...props}
-                                className={`${props.className} ${styles.bodyInput}`}
+                                className={[props.className, styles.bodyInput].filter(Boolean).join(' ')}
                                 value={body}
                                 onChange={(event) => setBody(event.target.value)}
                                 spellCheck
@@ -180,7 +180,7 @@ export function PostEditorPage() {
 type FieldInputProps = {
     id: string
     name: string
-    className: string
+    className: string | undefined
     'aria-invalid': boolean
     'aria-describedby': string | undefined
 }

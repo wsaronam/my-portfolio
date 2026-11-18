@@ -8,7 +8,7 @@ if (existsSync('.env')) {
     process.loadEnvFile('.env');
 }
 
-const databaseUrl = process.env['DATABASE_URL'];
+const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
     throw new Error('DATABASE_URL is not set. Copy .env.example to .env first.');

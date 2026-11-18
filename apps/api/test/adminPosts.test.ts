@@ -116,7 +116,7 @@ describe('creating posts', () => {
 
 describe('updating and deleting posts', () => {
     it('updates a post', async () => {
-        const { id } = (await createPost()).json();
+        const { id } = (await createPost()).json<{ id: string }>();
         const response = await admin({
             method: 'PUT',
             url: `/api/admin/posts/${id}`,
@@ -134,7 +134,7 @@ describe('updating and deleting posts', () => {
     });
 
     it('deletes a post, and deleting it again is a 404', async () => {
-        const { id } = (await createPost()).json();
+        const { id } = (await createPost()).json<{ id: string }>();
         const remove = () => admin({ method: 'DELETE', url: `/api/admin/posts/${id}` });
 
         expect((await remove()).statusCode).toBe(204);

@@ -18,6 +18,7 @@ describe('safeRedirectTarget', () => {
         '/admin.evil.example',
         '/administrator',
         '/blog',
+        // eslint-disable-next-line no-script-url -- test data: we check this URL is rejected
         'javascript:alert(1)',
         '',
     ])('rejects %j', (target) => {

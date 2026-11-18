@@ -73,7 +73,7 @@ export function ProjectDetailPage() {
                 </ExternalLink>
             </div>
 
-            {(previous || next) && (
+            {(previous ?? next) && (
                 <nav className={styles.pager} aria-label='More projects'>
                     {previous && (
                         <Link to={`/projects/${previous.slug}`} className={styles.pagerLink}>

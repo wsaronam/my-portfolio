@@ -32,5 +32,5 @@ catch (err) {
     process.exitCode = 1;
 }
 finally {
-    await client.end().catch(() => {});
+    await client.end().catch(() => undefined);
 }
