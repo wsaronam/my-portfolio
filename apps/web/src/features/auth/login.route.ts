@@ -6,6 +6,13 @@ import { ApiError } from "../../lib/api";
 
 
 
+/** a form field's text. FormData values can also be files, which we treat as empty */
+function getText(formData: FormData, name: string): string {
+    const value = formData.get(name);
+    return typeof value === 'string' ? value : '';
+}
+
+
 function redirectTarget(request: Request) {
     return safeRedirectTarget(new URL(request.url).searchParams.get('redirectTo'));
 }
@@ -24,8 +31,8 @@ export async function loginLoader({ request }: LoaderFunctionArgs) {
 /** runs when the login form is submitted */
 export async function loginAction({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
-    const email = String(formData.get('email') ?? '');
-    const password = String(formData.get('password') ?? '');
+    const email = getText(formData, 'email');
+    const password = getText(formData, 'password');
 
     try {
         await login(email, password);

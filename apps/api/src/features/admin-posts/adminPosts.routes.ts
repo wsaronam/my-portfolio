@@ -60,15 +60,17 @@ export const adminPostsRoutes: FastifyPluginAsyncZod = async (app) => {
             },
         },
         async (request, reply) => {
+            let post;
             try {
-                const post = await repository.create(request.body);
-                request.log.info({ userId: request.user?.id, postId: post.id }, 'Post created');
-                return reply.code(201).send(post);
+                post = await repository.create(request.body);
             } 
             catch (error) {
                 if (isUniqueViolation(error)) return reply.code(409).send(SLUG_TAKEN);
                 throw error;
             }
+
+            request.log.info({ userId: request.user?.id, postId: post.id }, 'Post created');
+            return reply.code(201).send(post);
         },
     );
 
@@ -83,16 +85,18 @@ export const adminPostsRoutes: FastifyPluginAsyncZod = async (app) => {
             },
         },
         async (request, reply) => {
+            let post;
             try {
-                const post = await repository.update(request.params.id, request.body);
-                if (!post) return reply.code(404).send(NOT_FOUND);
-                request.log.info({ userId: request.user?.id, postId: post.id }, 'Post updated');
-                return post;
+                post = await repository.update(request.params.id, request.body);
             } 
             catch (error) {
                 if (isUniqueViolation(error)) return reply.code(409).send(SLUG_TAKEN);
                 throw error;
             }
+
+            if (!post) return reply.code(404).send(NOT_FOUND);
+            request.log.info({ userId: request.user?.id, postId: post.id }, 'Post updated');
+            return post;
         },
     );
 

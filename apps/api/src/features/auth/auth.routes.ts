@@ -88,8 +88,11 @@ export const authRoutes: FastifyPluginAsyncZod = async (app) => {
             schema: { response: { 200: meResponseSchema, 401: errorResponseSchema } },
         },
         async (request) => {
-            // requireAuth guarantees request.user exists here
-            return { email: request.user!.email };
+            const { user } = request;
+            // requireAuth always sets this. if it ever doesn't, that's a bug in our code:
+            // fail loudly (500) rather than guess
+            if (!user) throw new Error('requireAuth must run before this handler');
+            return { email: user.email };
         }
     );
 }

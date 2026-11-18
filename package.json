@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "description": "My Portfolio showing off deployed apps",
   "main": "index.js",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev:web": "npm run dev --workspace=web",
     "dev:api": "npm run dev --workspace=api",
@@ -29,5 +32,13 @@
   "bugs": {
     "url": "https://github.com/wsaronam/my-portfolio/issues"
   },
-  "homepage": "https://github.com/wsaronam/my-portfolio#readme"
+  "homepage": "https://github.com/wsaronam/my-portfolio#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.8",
+    "globals": "^17.14.0",
+    "typescript-eslint": "^8.73.0"
+  }
 }
