@@ -1,7 +1,7 @@
 import { useLoaderData, Link, useFetcher } from 'react-router';
 import { adminPostsLoader } from './adminPosts.route';
 import { EmptyState } from '../../components/ui/EmptyState';
-import type { AdminPostListItem } from './adminPosts.schemas';
+import type { AdminPostListItem } from '@portfolio/shared';
 import { getPostStatus, POST_STATUS_LABELS } from './postStatus';
 import { formatLongDate } from '../../lib/formatDate';
 

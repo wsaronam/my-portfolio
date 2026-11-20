@@ -1,12 +1,8 @@
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { requireAuth } from "../auth/requireAuth.js";
 import { createAdminPostsRepository } from "./adminPosts.repository.js";
-import {
-    adminPostListSchema,
-    postIdParamsSchema,
-    adminPostSchema,
-    postInputSchema
-} from './adminPosts.schemas.js';
+import { adminPostListSchema, adminPostSchema, postInputSchema } from '@portfolio/shared';
+import { postIdParamsSchema } from './adminPosts.schemas.js';
 import { errorResponseSchema } from "../../http/schemas.js";
 import { isUniqueViolation } from "../../db/errors.js";
 import { z } from 'zod';

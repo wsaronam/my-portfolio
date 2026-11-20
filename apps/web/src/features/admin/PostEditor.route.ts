@@ -3,7 +3,8 @@ import { type ActionFunctionArgs, data, type LoaderFunctionArgs, redirect } from
 import { withAdminSession } from '../auth/redirects';
 import { createPost, fetchAdminPost, updatePost } from './adminPosts.api';
 import { ApiError } from '../../lib/api';
-import { type PostFormValues, type PostInput, postFormSchema } from './adminPosts.schemas';
+import type { PostInput } from '@portfolio/shared';
+import { type PostFormValues, postFormSchema } from './adminPosts.schemas';
 import { fromDateTimeLocal } from './dateTimeLocal';
 
 

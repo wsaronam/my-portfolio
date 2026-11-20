@@ -1,13 +1,8 @@
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { createPostsRepository } from "./posts.repository.js";
 import { errorResponseSchema } from "../../http/schemas.js";
-import { 
-    listPostsQuerySchema,
-    postListResponseSchema,
-    PAGE_SIZE,
-    postSlugParamsSchema,
-    postDetailSchema
- } from "./posts.schemas.js";
+import { postDetailSchema, postListSchema } from '@portfolio/shared';
+import { listPostsQuerySchema, PAGE_SIZE, postSlugParamsSchema } from './posts.schemas.js';
 
 
 
@@ -24,7 +19,7 @@ export const postsRoutes: FastifyPluginAsyncZod = async (app) => {
         {
             schema: {
                 querystring: listPostsQuerySchema,
-                response: { 200: postListResponseSchema },
+                response: { 200: postListSchema },
             },
         },
         async (request, reply) => {

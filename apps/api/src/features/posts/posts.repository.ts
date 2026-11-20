@@ -1,7 +1,7 @@
 import { and, isNotNull, lte, desc, count, eq } from "drizzle-orm";
 import { posts } from "../../db/schema.js";
 import type { Database } from "../../db/client.js";
-import type { PostSummary, PostDetail } from "./posts.schemas.js";
+import type { PostDetail, PostSummary } from '@portfolio/shared';
 
 
 

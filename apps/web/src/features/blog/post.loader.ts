@@ -1,5 +1,5 @@
 import  { type LoaderFunctionArgs, data } from "react-router";
-import { SLUG_PATTERN } from "./posts.schemas";
+import { SLUG_PATTERN } from "@portfolio/shared";
 import { fetchPost } from "./posts.api";
 
 

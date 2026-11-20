@@ -1,5 +1,5 @@
 import { apiRequest } from '../../lib/api';
-import { adminPostListSchema, adminPostSchema, type PostInput } from './adminPosts.schemas';
+import { adminPostListSchema, adminPostSchema, type PostInput } from '@portfolio/shared';
 
 
 

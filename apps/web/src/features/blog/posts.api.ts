@@ -1,5 +1,5 @@
 import { apiGet } from "../../lib/api";
-import { postListSchema, postDetailSchema } from './posts.schemas'
+import { postDetailSchema, postListSchema } from '@portfolio/shared';
 
 
 

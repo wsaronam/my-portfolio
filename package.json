@@ -21,7 +21,9 @@
     "test": "npm run test --workspaces --if-present",
     "test:int": "npm run test:int --workspace=api",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "build:shared": "npm run build --workspace=@portfolio/shared",
+    "dev:shared": "npm run dev --workspace=@portfolio/shared"
   },
   "repository": {
     "type": "git",

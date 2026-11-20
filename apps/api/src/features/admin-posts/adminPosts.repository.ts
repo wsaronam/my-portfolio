@@ -1,5 +1,5 @@
 import { type PostRow, posts } from "../../db/schema.js";
-import type { AdminPost, PostInput } from "./adminPosts.schemas.js";
+import type { AdminPost, PostInput } from '@portfolio/shared';
 import type { Database } from "../../db/client.js";
 import { desc, eq } from "drizzle-orm";
 

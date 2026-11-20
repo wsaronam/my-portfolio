@@ -1,6 +1,6 @@
 import { TagList } from "../../components/ui/TagList";
 import { getDateParts } from "../../lib/formatDate"
-import type { PostSummary } from "./posts.schemas";
+import type { PostSummary } from "@portfolio/shared";;
 
 import styles from './PostListItem.module.css';
 import { Link } from "react-router";
