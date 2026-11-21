@@ -31,7 +31,25 @@ const envSchema = z.object({
                 )
                 .max(20),
         ),
+    // a header that a trusted edge proxy sets to the visitor's IP and that visitors
+    // can't fake. on Render this is Cloudflare's 'cf-connecting-ip'. unset = use the
+    // connection's own address (correct when nothing sits in front of the server)
+    CLIENT_IP_HEADER: z
+        .string()
+        .regex(/^[a-z0-9-]+$/, 'Use a lowercase header name, e.g. cf-connecting-ip')
+        .optional(),
 })
+    .superRefine((env, ctx) => {
+        // in production the database is on the internet: insist on encrypted connections
+        // that check the server's certificate (so nobody can pretend to be the database)
+        if (env.NODE_ENV === 'production' && new URL(env.DATABASE_URL).searchParams.get('sslmode') !== 'verify-full') {
+            ctx.addIssue({
+                code: 'custom',
+                path: ['DATABASE_URL'],
+                message: 'In production, DATABASE_URL must end with ?sslmode=verify-full',
+            });
+        }
+    })
 
 
 export type Config = z.infer<typeof envSchema>

@@ -10,7 +10,8 @@ import cookie from '@fastify/cookie';
 import rateLimit from '@fastify/rate-limit';
 import { authRoutes } from "./features/auth/auth.routes.js";
 import { adminPostsRoutes } from "./features/admin-posts/adminPosts.routes.js";
-import helmet from '@fastify/helmet'
+import helmet from '@fastify/helmet';
+import { clientIp } from './http/clientIp.js';
 
 
 
@@ -72,7 +73,12 @@ export function buildApp(config: Config): FastifyInstance {
 
     app.register(cookie);
     // rate limits are opt-in per route (see the login route)
-    app.register(rateLimit, { global: false });
+    app.register(rateLimit, {
+        global: false,
+        // count attempts per visitor. bhind an edge proxy, the visitor's address is in a
+        // header the proxy controls; otherwise it's the connection's own address.
+        keyGenerator: (request) => clientIp(request, config.CLIENT_IP_HEADER),
+    });
 
     app.register(healthRoutes);
     app.register(postsRoutes, { prefix: 'api/posts' });
