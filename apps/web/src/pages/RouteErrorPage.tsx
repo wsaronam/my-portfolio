@@ -26,7 +26,10 @@ export function RouteErrorPage() {
         <section className={styles.error} role="alert">
             <title>Something went wrong | Willy Saronamihardja</title>
             <h1>Connection lost</h1>
-            <p>We couldn't load this page. The server may be busy or temporarily down.</p>
+            <p>
+                We couldn't load this page. The server may be waking up: it sleeps when nobody has visited
+                for a while. Please try again in a moment.
+            </p>
 
             <div className={styles.actions}>
                 <button

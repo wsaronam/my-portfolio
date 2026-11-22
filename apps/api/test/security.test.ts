@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { afterEach, describe, expect, it } from 'vitest';
 import { ADMIN_EMAIL, ADMIN_PASSWORD, APP_ORIGIN, buildTestApp, createAdmin, login, resetDatabase } from './helpers.js';
+import { getTestDatabaseUrl } from './testDatabase.js';
 
 
 
@@ -40,8 +41,10 @@ describe('security headers', () => {
         );
         await app.close();
 
-        app = await buildTestApp({ NODE_ENV: 'production' });
-        expect((await app.inject({ method: 'GET', url: '/api/posts' })).headers['strict-transport-security']).toBe(
+        // production insists on an encrypted database connection. this request never
+        // reaches the database (it's a 404), so the local test database still works.
+        app = await buildTestApp({ NODE_ENV: 'production', DATABASE_URL: `${getTestDatabaseUrl()}?sslmode=verify-full` });
+        expect((await app.inject({ method: 'GET', url: '/api/nothing-here' })).headers['strict-transport-security']).toBe(
             'max-age=31536000; includeSubDomains',
         );
     });
@@ -101,5 +104,48 @@ describe('trustProxy and the login rate limit', () => {
             payload: { email: ADMIN_EMAIL, password: ADMIN_PASSWORD },
         });
         expect(response.statusCode).toBe(204);
+    });
+})
+
+
+describe('CLIENT_IP_HEADER (the visitor IP from an edge proxy like Cloudflare)', () => {
+    /** a login attempt "from" a visitor, as the edge proxy would report it */
+    function attempt(target: FastifyInstance, headers: Record<string, string>, password = 'guess') {
+        return target.inject({
+            method: 'POST',
+            url: '/api/auth/login',
+            headers: { origin: APP_ORIGIN, ...headers },
+            payload: { email: ADMIN_EMAIL, password },
+        });
+    };
+
+    async function freshApp(env: Record<string, string>) {
+        const target = await buildTestApp(env);
+        await resetDatabase(target.db);
+        await createAdmin(target.db);
+        return target;
+    };
+
+    it('counts attempts per visitor IP from the trusted header', async () => {
+        app = await freshApp({ CLIENT_IP_HEADER: 'cf-connecting-ip' });
+        for (let i = 0; i < 5; i++) await attempt(app, { 'cf-connecting-ip': '198.51.100.1' });
+
+        expect((await attempt(app, { 'cf-connecting-ip': '198.51.100.1' }, ADMIN_PASSWORD)).statusCode).toBe(429);
+        // a different visitor is not affected by someone else's guesses
+        expect((await attempt(app, { 'cf-connecting-ip': '198.51.100.2' }, ADMIN_PASSWORD)).statusCode).toBe(204);
+    });
+
+    it('ignores X-Forwarded-For, which visitors can write themselves', async () => {
+        app = await freshApp({ CLIENT_IP_HEADER: 'cf-connecting-ip' });
+        for (let i = 1; i <= 5; i++) {
+            await attempt(app, { 'cf-connecting-ip': '198.51.100.1', 'x-forwarded-for': `203.0.113.${i}` });
+        }
+        expect((await attempt(app, { 'cf-connecting-ip': '198.51.100.1' }, ADMIN_PASSWORD)).statusCode).toBe(429);
+    });
+
+    it('without the setting, the header is ignored (anyone could send it locally)', async () => {
+        app = await freshApp({});
+            for (let i = 1; i <= 5; i++) await attempt(app, { 'cf-connecting-ip': `198.51.100.${i}` });
+        expect((await attempt(app, { 'cf-connecting-ip': '198.51.100.99' }, ADMIN_PASSWORD)).statusCode).toBe(429);
     });
 })

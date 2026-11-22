@@ -30,6 +30,16 @@ describe('loadConfig', () => {
         ]);
     })
 
+    it('requires a verified TLS connection to the database in production', () => {
+        expect(() => loadConfig({ DATABASE_URL, NODE_ENV: 'production' })).toThrow(/sslmode=verify-full/);
+        expect(() => loadConfig({ DATABASE_URL: `${DATABASE_URL}?sslmode=require`, NODE_ENV: 'production' })).toThrow(
+            /sslmode=verify-full/,
+        );
+        expect(loadConfig({ DATABASE_URL: `${DATABASE_URL}?sslmode=verify-full`, NODE_ENV: 'production' }).NODE_ENV).toBe(
+            'production',
+        );
+    })
+
     it('fails fast when DATABASE_URL is missing', () => {
         expect(() => loadConfig({})).toThrow(/DATABASE_URL/);
     })
@@ -41,6 +51,8 @@ describe('loadConfig', () => {
         ['APP_ORIGIN', 'not a url'],
         ['TRUST_PROXY', 'true'],
         ['TRUST_PROXY', '999.1.1.1'],
+        ['CLIENT_IP_HEADER', 'CF-Connecting-IP'],
+        ['CLIENT_IP_HEADER', 'x-ip; evil'],
     ])('rejects an invalid %s', (name, value) => {
         expect(() => loadConfig({ DATABASE_URL, [name]: value })).toThrow(new RegExp(name));
     })

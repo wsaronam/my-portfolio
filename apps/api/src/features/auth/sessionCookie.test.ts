@@ -5,7 +5,7 @@ import { getSessionCookie } from './sessionCookie.js';
 
 
 
-const DATABASE_URL = 'postgres://user:pass@127.0.0.1:5432/portfolio';
+const DATABASE_URL = 'postgres://user:pass@127.0.0.1:5432/portfolio?sslmode=verify-full';
 
 
 describe('getSessionCookie', () => {

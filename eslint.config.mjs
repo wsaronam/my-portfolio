@@ -92,7 +92,7 @@ export default defineConfig([
 
     // ---- Command-line scripts print their results ------------------------------
     {
-        files: ['apps/api/scripts/**/*.ts'],
+        files: ['apps/api/scripts/**/*.ts', 'apps/api/src/migrate.ts'],
         rules: { 'no-console': 'off' },
     },
 
