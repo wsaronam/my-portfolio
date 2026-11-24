@@ -36,8 +36,9 @@ const envSchema = z.object({
     // connection's own address (correct when nothing sits in front of the server)
     CLIENT_IP_HEADER: z
         .string()
-        .regex(/^[a-z0-9-]+$/, 'Use a lowercase header name, e.g. cf-connecting-ip')
-        .optional(),
+        .regex(/^[a-z0-9-]*$/, 'Use a lowercase header name, e.g. cf-connecting-ip')
+        .optional()
+        .transform((value) => value || undefined),
 })
     .superRefine((env, ctx) => {
         // in production the database is on the internet: insist on encrypted connections

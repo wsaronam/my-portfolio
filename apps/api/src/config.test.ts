@@ -30,6 +30,10 @@ describe('loadConfig', () => {
         ]);
     })
 
+    it('treats an empty CLIENT_IP_HEADER as not set (a blank line in .env)', () => {
+        expect(loadConfig({ DATABASE_URL, CLIENT_IP_HEADER: '' }).CLIENT_IP_HEADER).toBeUndefined();
+    })
+
     it('requires a verified TLS connection to the database in production', () => {
         expect(() => loadConfig({ DATABASE_URL, NODE_ENV: 'production' })).toThrow(/sslmode=verify-full/);
         expect(() => loadConfig({ DATABASE_URL: `${DATABASE_URL}?sslmode=require`, NODE_ENV: 'production' })).toThrow(
